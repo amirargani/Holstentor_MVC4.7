@@ -1,0 +1,82 @@
+﻿@model Restaurant.Models.ViewModels.ChangePasswordViewModel
+@{
+    ViewData["Title"] = "Passwort änderen";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Restaurant.Models.Repository.ProfileRep prorep = new Restaurant.Models.Repository.ProfileRep();
+    Restaurant.Models.Repository.HomeRep ivm = new Restaurant.Models.Repository.HomeRep();
+    var qivm = ivm.GetIndexHeaderSelect();
+}
+@Html.Partial("P_HeaderBG")
+<!-- Main Content -->
+<main class="main">
+    <!-- Section -->
+    <section class="py-0">
+        <div class="bg-web">
+            <!-- Section -->
+            <section class="py-0 pb-3">
+                <div class="jumbotron jumbotron-fluid bg-rosa py-7">
+                    <div class="container">
+                        <h1 class="text-web fs-3 fs-lg-5 mt-5" data-aos="fade-down" data-aos-duration="1000">Mein persönlichen Daten</h1>
+                        <h5 class="text-black mb-2" data-aos="fade-down" data-aos-duration="1100">Mein Konto</h5>
+                        <nav>
+                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link" href="/Profile/Index">Mein Profil</a>
+                                @{
+                                    if (Session["EmailUser"] != null)
+                                    {
+                                        string username = Session["EmailUser"].ToString();
+                                        if (ivm.GetUserRole(username) == "User")
+                                        {
+                                            if (prorep.InsertUser(username) == true)
+                                            {
+                                                <a class="nav-item nav-link" href="/Profile/Nachricht">Meine Nachricht</a>
+                                                <a class="nav-item nav-link" href="/Profile/PasswortAendern">Passwort</a>
+                                            }
+                                            else if (prorep.InsertUser(username) == false)
+                                            {
+                                                <a class="nav-item nav-link" href="/Profile/Index">Meine Nachricht</a>
+                                                <a class="nav-item nav-link" href="/Profile/Index">Passwort</a>
+                                            }
+                                        }
+                                    }
+                                }
+                            </div>
+                        </nav>
+                        <div class="tab-content py-3 px-3 px-sm-0">
+                            <div class="tab-pane fade show active">
+                                @using (Html.BeginForm("PasswortAendern", "Profile", FormMethod.Post, new { @class = "col px-lg-6 px-xl-8 px-xxl-11 py-9 py-lg-4" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <h5 class="text-web mb-2">Aktuelles Passwort:</h5>
+                                    <div class="form-group mb-4">
+                                        @Html.EditorFor(model => model.OldPassword, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Aktuelles Passwort" } })
+                                        @Html.ValidationMessageFor(model => model.OldPassword, "", new { @class = "text-danger" })
+                                    </div>
+                                    <h5 class="text-web mb-2">Passwort:</h5>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Passwort" } })
+                                        @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+                                    </div>
+                                    <h5 class="text-web mb-2">Passwort Wiederholung:</h5>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Passwort Wiederholung" } })
+                                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-lg btn-primary btn-block mb-4 text-capitalize">Speichen<i class="fas fa-save ml-2"></i></button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="text-white mb-2 text-center" data-aos="fade-up" data-aos-duration="1650"><b>@qivm.NameSite</b></h5>
+            </section>
+            <!-- End of Section -->
+        </div>
+    </section>
+    <!-- End of Section -->
+</main>
+<!-- End of Main Content -->
+@Html.Partial("P_Footer")

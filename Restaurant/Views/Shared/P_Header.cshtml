@@ -1,0 +1,99 @@
+﻿@{
+    Restaurant.Models.Repository.HomeRep ivm = new Restaurant.Models.Repository.HomeRep();
+    var qivm = ivm.GetIndexHeaderSelect();
+    var qcategory = ivm.GetCategoryLink().ToList();
+    var qsubcategory = ivm.GetSubCategoryLink().ToList();
+}
+
+<!-- Header -->
+<header class="spyre-navbar navbar navbar-expand-lg fixed-top align-items-center" data-transparent data-text-color="#ffffff">
+    <!-- Spyrenav Overlay -->
+    <div class="spyre-navbar-overlay overlay-slide" style="background-image: url(../wwwroot/assets/img/backgrounds/upload/menu/IMG-20190308-WA0004.jpg); background-color: #7e1919 !important; background-position: right;">
+        <div class="container">
+            <div class="row">
+                <div class="spyre-navbar-nav-container col-md-6 col-lg-5 col-xl-4 bg-rosa bg-rosa-br ext-l">
+                    <nav class="spyre-navbar-nav">
+                        <ul class="spyre-nav">
+                            <li class="spyre-nav-item"><a href="/" class="spyre-nav-link"><i class="fas fa-home mr-2 fs-2"></i>Start</a></li>
+                            @{
+                                foreach (var itemcategory in qcategory)
+                                {
+                                    if (itemcategory.ActivePassive == true)
+                                    {
+                                        <li class="spyre-nav-item dropdown">
+                                            @if (itemcategory.FontName == null || itemcategory.FontName == "")
+                                            {
+                                                <h1 class="spyre-nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"><i class="fas fa-th-list mr-2 fs-2"></i>@itemcategory.TitleCategory</h1>
+                                            }
+                                            else
+                                            {
+                                                <h1 class="spyre-nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"><i class="@itemcategory.FontName mr-2 fs-2"></i>@itemcategory.TitleCategory</h1>
+                                            }
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                @foreach (var itemsubcategory in qsubcategory.Where(a => a.CategoryID == itemcategory.ID))
+                                                {
+                                                    if (itemsubcategory.ActivePassive == true)
+                                                    {
+                                                        if (itemsubcategory.FontName == null || itemsubcategory.FontName == "")
+                                                        {
+                                                            <li class="dropdown-menu-item"><a href="/Home/Unterkategoriesuche?id=@itemsubcategory.Link" class="dropdown-menu-link"><i class="fas fa-chevron-circle-right mr-2 fs-1"></i>@itemsubcategory.TitleSubCategory</a></li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li class="dropdown-menu-item"><a href="/Home/Unterkategoriesuche?id=@itemsubcategory.Link" class="dropdown-menu-link"><i class="@itemsubcategory.FontName mr-2 fs-1"></i>@itemsubcategory.TitleSubCategory</a></li>
+                                                        }
+                                                    }
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                            }
+                            <li class="spyre-nav-item"><a href="/Home/Galerie" class="spyre-nav-link"><i class="fas fa-images mr-2 fs-2"></i>Galerie</a></li>
+                            <li class="spyre-nav-item"><a href="/Home/Kontakt" class="spyre-nav-link"><i class="fas fa-map-signs mr-2 fs-2"></i>Kontakt</a></li>
+                            <li class="spyre-nav-item"><a href="/Home/Ueberuns" class="spyre-nav-link"><i class="fas fa-info-circle mr-2 fs-2"></i>Über uns</a></li>
+                            <li class="spyre-nav-item"><a href="#Landkarte" data-toggle="modal" data-target="#Landkarte" class="spyre-nav-link"><i class="fas fa-map-marker-alt mr-2 fs-2"></i>Landkarte</a></li>
+                            @{
+                                if (Session["EmailUser"] != null)
+                                {
+                                    string username = Session["EmailUser"].ToString();
+                                    if (ivm.GetUserRole(username) == "User")
+                                    {
+                                        <li class="spyre-nav-item dropdown">
+                                            <a href="#" class="spyre-nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog mr-2 fs-2"></i>Einstellungen</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li class="dropdown-menu-item"><a href="/Profile" class="dropdown-menu-link"><i class="fas fa-user mr-2 fs-1"></i>Mein Profil</a></li>
+                                                <li class="dropdown-menu-item"><a href="/Profile/Nachricht" class="dropdown-menu-link"><i class="fas fa-comment mr-2 fs-1"></i>Meine Nachricht</a></li>
+                                                <li class="dropdown-menu-item"><a href="/Profile/PasswortAendern" class="dropdown-menu-link"><i class="fas fa-key mr-2 fs-1"></i>Passwort</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="spyre-nav-item"><a href="/Account/Ausloggen" class="spyre-nav-link"><i class="fas fa-power-off mr-2 fs-2"></i>Ausloggen</a></li>
+                                    }
+                                    if (ivm.GetUserRole(username) == "Admin")
+                                    {
+                                        <li class="spyre-nav-item dropdown">
+                                            <h1 class="spyre-nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;"><i class="fas fa-cog mr-2 fs-2"></i>Einstellungen</h1>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li class="dropdown-menu-item"><a href="/Admin" class="dropdown-menu-link"><i class="fas fa-user-tie mr-2 fs-1"></i>Meine Verwaltung</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="spyre-nav-item"><a href="/Account/Ausloggen" class="spyre-nav-link"><i class="fas fa-power-off mr-2 fs-2"></i>Ausloggen</a></li>
+
+                                    }
+                                }
+                                if (Session["EmailUser"] == null) // else
+                                {
+                                    <li class="spyre-nav-item"><a href="/Account/Einloggen" class="spyre-nav-link"><i class="fas fa-sign-in-alt mr-2 fs-2"></i>Einloggen</a></li>
+                                }
+                                <li class="spyre-nav-item"><div class="menu-toggle spyre-nav-link" style="width: auto;"><i class="fas fa-times mr-2 fs-2"></i>Schließen</div></li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Spyrenav Overlay -->
+</header>
+<!-- End of Header -->
+@Html.Partial("P_Location")

@@ -1,0 +1,224 @@
+﻿@model IEnumerable<Restaurant.Models.ViewModels.VmCategoryProductViewModel>
+@{
+    ViewData["Title"] = "Kategoriesuche | Restaurant am Holstentor Lübeck";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Restaurant.Models.Repository.HomeRep ivm = new Restaurant.Models.Repository.HomeRep();
+    var qivm = ivm.GetIndexHeaderSelect();
+    int i = 0;
+    int j = 0;
+    int ii = 0;
+    string kategorie = null;
+    int categoryid = 0;
+    var qcategory = ivm.GetCategoryLink().ToList();
+    var qsubcategory = ivm.GetSubCategoryLink().ToList();
+}
+
+<!-- Header -->
+@Html.Partial("P_HeaderBG")
+<!-- End of Header -->
+<!-- Main Content -->
+<main class="main">
+    <!-- Section -->
+    <section class="py-0">
+        <div class="bg-web">
+            <!-- Section -->
+            <section class="py-0 pb-3">
+                <div class="jumbotron jumbotron-fluid bg-rosa py-7">
+                    <div class="container">
+                        @{
+                            if (Model.Count() <= 0)
+                            {
+                                <h1 class="text-web mt-5" data-aos="fade-down" data-aos-duration="1000">@qivm.NameSite</h1>
+                                <h5 class="text-black mb-2" data-aos="fade-down" data-aos-duration="1100"><i class="zmdi zmdi-email zmdi-hc-fw mr-1"></i>@qivm.Street @qivm.Number / @qivm.PostCode @qivm.City</h5>
+                            }
+                        }
+                        @{
+                            if (Model.Count() <= 0)
+                            {
+                                <h1 class="text-web fs-3 fs-lg-5 text-center" data-aos="fade-down" data-aos-duration="1200">Nichts gefunden.</h1>
+                            }
+
+                        }
+                        @{
+                            if (Model.Count() > 0)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    if (i < 1)
+                                    {
+                                        if (item.TitleCategory != null)
+                                        {
+                                            <h1 class="text-web fs-3 fs-lg-5 mt-5" data-aos="fade-down" data-aos-duration="1000">@item.TitleCategory</h1>
+                                        }
+                                        if (item.DescriptionCategory != null)
+                                        {
+                                            <h5 class="text-black mb-2" data-aos="fade-down" data-aos-duration="1100">@item.DescriptionCategory</h5>
+                                        }
+                                        i++;
+                                    }
+                                }
+                            }
+
+                        }
+                        <ul class="pt-2 mb-2 fw-light list-unstyled">
+                            @foreach (var item in Model)
+                            {
+                                if (j < 1)
+                                {
+                                    foreach (var itemcategory in qcategory.Where(a => a.ID == item.IDCategory))
+                                    {
+                                        kategorie = itemcategory.TitleCategory;
+                                        if (itemcategory.ActivePassive == true)
+                                        {
+                                            if (itemcategory.FontName == null || itemcategory.FontName == "")
+                                            {
+                                                <li class="my-1 badge badge-light"><a href="/Home/Kategoriesuche?id=@itemcategory.Link" class="text-web"><i class="fas fa-th-list zmdi-hc-fw mr-1"></i>@itemcategory.TitleCategory</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li class="my-1 badge badge-light"><a href="/Home/Kategoriesuche?id=@itemcategory.Link" class="text-web"><i class="@itemcategory.FontName zmdi-hc-fw mr-1"></i>@itemcategory.TitleCategory</a></li>
+                                            }
+                                        }
+                                        foreach (var itemsubcategory in qsubcategory.Where(a => a.CategoryID == itemcategory.ID))
+                                        {
+                                            if (itemsubcategory.ActivePassive == true)
+                                            {
+                                                if (itemsubcategory.FontName == null || itemsubcategory.FontName == "")
+                                                {
+                                                    <li class="my-1 badge badge-light"><a href="/Home/Unterkategoriesuche?id=@itemsubcategory.Link" class="text-web"><i class="fas fa-chevron-circle-right zmdi-hc-fw mr-1"></i>@itemsubcategory.TitleSubCategory</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="my-1 badge badge-light"><a href="/Home/Unterkategoriesuche?id=@itemsubcategory.Link" class="text-web"><i class="@itemsubcategory.FontName zmdi-hc-fw mr-1"></i>@itemsubcategory.TitleSubCategory</a></li>
+                                                }
+                                            }
+                                        }
+                                    }
+                                    j++;
+                                }
+                            }
+                        </ul>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                categoryid = Convert.ToInt32(item.IDCategory);
+                            }
+                        }
+                        @{ <!-- (: -->
+                            if (Model.Count() > 0)
+                            {
+                                <table class="table table-light">
+                                    @{
+                                        foreach (var itemsubcategory in qsubcategory.Where(a => a.CategoryID == categoryid && a.ActivePassive == true))
+                                        {
+                                            foreach (var item in Model.Where(a => a.IDCategory == itemsubcategory.CategoryID).OrderBy(a => a.Position))
+                                            {
+                                                if (item.IDSubCategory == itemsubcategory.ID)
+                                                {
+                                                    if (ii < 1)
+                                                    {
+                                                        <thead>
+                                                            <tr class="bg-web text-white font-weight-bold" style="font-size: 0.73rem !important;">
+                                                                <th scope="col">
+                                                                    @*@item.TitleCategory |*@ @item.TitleSubCategory |
+
+                                                                    @if (item.ImageGallerySubCategory != null)
+                                                                    {
+                                                                        <a data-fancybox="gallery" data-caption="@item.NamePicGallerySubCategory" href="@item.ImageGallerySubCategory"><i class="fas fa-image text-success"></i></a>
+                                                                    }
+                                                                    @if (item.ImageGallerySubCategory == null)
+                                                                    {
+                                                                        <i class="fas fa-image text-black"></i>
+                                                                    }
+                                                                    @if (item.DescriptionSubCategory != null)
+                                                                    {
+                                                                        <br /><small>@item.DescriptionSubCategory</small>
+                                                                    }
+                                                                </th>
+                                                                <th scope="col">Foto</th>
+                                                                <th scope="col">@item.SubtitleSubCategory1</th>
+                                                                <th scope="col">@item.SubtitleSubCategory2</th>
+                                                                <th scope="col">@item.SubtitleSubCategory3</th>
+                                                            </tr>
+                                                        </thead>
+                                                        ii++;
+                                                    }
+                                                    <tbody>
+                                                        <tr class="font-weight-bold" style="font-size: 0.83rem !important;">
+                                                            <td>
+                                                                @item.TitleProduct
+                                                                @if (item.DescriptionProduct != null)
+                                                                {
+                                                                    <br /><small class="text-web">@item.DescriptionProduct</small>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (item.NamePicGallery != null)
+                                                                {
+                                                                    <a data-fancybox="gallery" data-caption="@item.TitleProduct" href="@item.ImageGallery"><i class="fas fa-image text-success"></i></a>
+                                                                }
+                                                                @if (item.NamePicGallery == null)
+                                                                {
+                                                                    <i class="fas fa-image text-black"></i>
+                                                                }
+                                                            </td>
+                                                            @if (item.PriceProduct1 != null)
+                                                            {
+                                                                if (item.PriceProduct1 == "0" || item.PriceProduct1 == "-")
+                                                                {
+                                                                    <td class="text-white">@item.PriceProduct1</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td style="color: #005dc9;">@item.PriceProduct1</td>
+                                                                }
+                                                            }
+                                                            <td style="color: #005dc9;">
+                                                                @if (item.PriceProduct2 != null)
+                                                                {
+                                                                    @item.PriceProduct2
+                                                                }
+                                                            </td>
+                                                            <td style="color: #005dc9;">
+                                                                @if (item.PriceProduct3 != null)
+                                                                {
+                                                                    @item.PriceProduct3
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                }
+                                            }
+                                            ii--;
+                                        }
+                                    }
+                                </table>
+                            }
+                        }
+                        <ul class="pt-2 mb-5 mt-2 fw-light list-unstyled">
+                            @foreach (var item in qcategory.Where(a => a.TitleCategory != kategorie))
+                            {
+                                if (item.ActivePassive == true)
+                                {
+                                    if (item.FontName == null || item.FontName == "")
+                                    {
+                                        <li class="my-1 badge badge-light"><a href="/Home/Kategoriesuche?id=@item.Link" class="text-web"><i class="fas fa-th-list zmdi-hc-fw mr-1"></i>@item.TitleCategory</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="my-1 badge badge-light"><a href="/Home/Kategoriesuche?id=@item.Link" class="text-web"><i class="@item.FontName zmdi-hc-fw mr-1"></i>@item.TitleCategory</a></li>
+                                    }
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <h5 class="text-white mb-2 text-center" data-aos="fade-up" data-aos-duration="1300"><b>@qivm.NameSite</b></h5>
+            </section>
+            <!-- End of Section -->
+        </div>
+    </section>
+    <!-- End of Section -->
+</main>
+<!-- End of Main Content -->
+@Html.Partial("P_Footer")

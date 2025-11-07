@@ -1,0 +1,156 @@
+﻿@model  IEnumerable<Restaurant.Models.Domin.Tbl_Nachricht>
+@{
+    ViewBag.Title = "Meine Verwaltung | Nachrichten";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Restaurant.Models.Repository.HomeRep ivm = new Restaurant.Models.Repository.HomeRep();
+    var qivm = ivm.GetIndexHeaderSelect();
+    int c = 0;
+}
+
+@Html.Partial("P_HeaderBG")
+<!-- Main Content -->
+<main class="main">
+    <!-- Section -->
+    <section class="py-0">
+        <div class="bg-web">
+            <!-- Section -->
+            <section class="py-0 pb-3">
+                <div class="jumbotron jumbotron-fluid bg-rosa py-7">
+                    <div class="container">
+                        <h1 class="text-web fs-3 fs-lg-5 mt-5" data-aos="fade-down" data-aos-duration="1000">Meine Verwaltung</h1>
+                        <h5 class="text-black mb-2" data-aos="fade-down" data-aos-duration="1100">Nachrichten</h5>
+                        <div class="tab-content py-3 px-3 px-sm-0">
+                            <div class="tab-pane fade show active">
+                                <!-- Pagination -->
+                                <div class="col-12">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li><a class="btn btn-secondary mr-3" href="/Admin"><i class="fas fa-chevron-circle-left mr-2"></i>Meine Verwaltung</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- End of Pagination -->
+                                <div class="p-5">
+                                    <div class="table-responsive mb-2">
+                                        <table class="table table-light text-center">
+                                            <thead>
+                                                <tr class="bg-web text-white font-weight-bold" style="font-size: 0.73rem !important;">
+                                                    <th>#</th>
+                                                    <th>Nachricht [Benutzer]</th>
+                                                    <th>Nachricht</th>
+                                                    <th>Name</th>
+                                                    <th>Datum</th>
+                                                    <th><span class="text-success">Gelesen</span>/<span class="text-danger">Ungelesen</span></th>
+                                                    <th><i class="fas fa-reply text-success"></i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    int i = 1;
+                                                    if (Model.Count() > 0)
+                                                    {
+                                                        foreach (var item in Model.Where(a => a.Confirm == false).OrderByDescending(a => a.Date))
+                                                        {
+                                                            <tr class="font-weight-bold" style="font-size: 0.83rem !important;">
+                                                                <th>@i</th>
+                                                                <th class="fs--1" style="width:50%;">@item.Text</th>
+                                                                <th class="fs--1" style="width:50%;">@item.TextAdmin</th>
+                                                                <th>@ivm.GetUser(item.UserIdSend).Name&nbsp;@ivm.GetUser(item.UserIdSend).NameFamily</th>
+                                                                <th>@item.Date</th>
+                                                                <th>
+                                                                    @{
+                                                                        if (item.Confirm == false)
+                                                                        {
+                                                                            <i class="fas fa-times text-danger"></i>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <i class="fas fa-check text-success"></i>
+                                                                        }
+                                                                    }
+                                                                </th>
+                                                                <th>
+                                                                    <form class="" action="/Admin/NachrichtenAntworten" method="post">
+                                                                        <input type="hidden" for="@item.ID" name="id" value="@item.ID" />
+                                                                        <button type="submit" class="btn btn-success" style="width: 50px;"><i class="fas fa-reply"></i></button>
+                                                                    </form>
+                                                                </th>
+                                                            </tr>
+                                                            i = i + 1;
+                                                        }
+                                                    }
+                                                    if (Model.Count() > 0)
+                                                    {
+                                                        foreach (var item in Model.OrderByDescending(a => a.Confirm == false))
+                                                        {
+                                                            if (item.Confirm == false) { }
+
+                                                            if (item.Confirm == true && c < 1)
+                                                            {
+                                                                <tr>
+                                                                    <td class="bg-danger text-white" colspan="7">-</td>
+                                                                </tr>
+                                                            }
+                                                            c++;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td class="bg-danger text-white" colspan="7">-</td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <!-- Pagination -->
+                                        <div class="col-12">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    @{
+                                                        if (Model.Count() > 0)
+                                                        {
+                                                            ViewBag.TakeNumber = ViewData["MessagesTakeNumber"];
+                                                            if (Model.Count() >= ViewBag.TakeNumber) { }
+                                                            ViewBag.CountMessages = ViewData["MessagesCount"];
+                                                            double Take = ViewBag.TakeNumber;
+                                                            double Count = ViewBag.CountMessages;
+                                                            double Div = Math.Ceiling(Count / Take);
+                                                            for (int j = 1; j <= Div; j++)
+                                                            {
+                                                                //string ac = "";
+                                                                string di = "";
+                                                                string bg = "";
+                                                                string tx = "";
+                                                                string cu = "pointer";
+
+                                                                if (ViewBag.MessagesPage == j)
+                                                                {
+                                                                    //ac = "active";
+                                                                    di = "disabled";
+                                                                    bg = "bg-dark";
+                                                                    tx = "text-white";
+                                                                    cu = "not-allowed";
+                                                                }
+                                                                <li class="page-item @di"><a class="page-link @bg @tx" href="/Admin/Nachrichten?page=@j.ToString()" style="cursor:@cu">@j.ToString()</a></li>
+                                                            }
+                                                        }
+                                                    }
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                        <!-- End of Pagination -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="text-white mb-2 text-center" data-aos="fade-up" data-aos-duration="1600"><b>@qivm.NameSite</b></h5>
+            </section>
+            <!-- End of Section -->
+        </div>
+    </section>
+</main>
+<!-- End of Main Content -->
+@Html.Partial("P_Footer")

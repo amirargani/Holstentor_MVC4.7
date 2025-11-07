@@ -1,0 +1,898 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbHolstentorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Album">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NamePic" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_EmailConfirmed">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Confirmed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Galerie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NamePic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Hochladen">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageAbout" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageFooter" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageGallery" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Video" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Index">
+          <Key>
+            <PropertyRef Name="IDIndex" />
+          </Key>
+          <Property Name="IDIndex" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TypedText1" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="TypedText2" Type="nvarchar" MaxLength="300" />
+          <Property Name="TypedText3" Type="nvarchar" MaxLength="300" />
+          <Property Name="TypedText4" Type="nvarchar" MaxLength="300" />
+          <Property Name="TypedText5" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Tbl_IndexET">
+          <Key>
+            <PropertyRef Name="IDIndex" />
+          </Key>
+          <Property Name="IDIndex" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="EmbedLinkGoogleMap" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NameSite" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Number" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Kategorie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivePassive" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="FontName" Type="nvarchar" MaxLength="30" />
+          <Property Name="TitleCategory" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Nachricht">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Confirm" Type="bit" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateUpdate" Type="datetime2" Precision="7" />
+          <Property Name="Text" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="TextAdmin" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="UserIdRecive" Type="nvarchar(max)" />
+          <Property Name="UserIdSend" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Tbl_Produkte">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActiveInactive" Type="bit" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Price1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price3" Type="nvarchar" MaxLength="50" />
+          <Property Name="SubCategoryID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="450" />
+          <Property Name="Position" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_RestPassword">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="ConfirmPassword" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Tbl_Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="NormalizedName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Tbl_Unterkategorie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivePassive" Type="bit" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="FontName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Subtitle1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subtitle2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subtitle3" Type="nvarchar" MaxLength="50" />
+          <Property Name="TitleSubCategory" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_UnterkategorieGalerie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NamePic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubCategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="450" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="NameFamily" Type="nvarchar" MaxLength="256" />
+          <Property Name="NormalizedEmail" Type="nvarchar" MaxLength="256" />
+          <Property Name="NormalizedUserName" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+          <Property Name="RoleID" Type="nvarchar" MaxLength="450" />
+        </EntityType>
+        <Association Name="FK_Tbl_EmailConfirmed_Tbl_Users">
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="1" />
+          <End Role="Tbl_EmailConfirmed" Type="Self.Tbl_EmailConfirmed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_EmailConfirmed">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Galerie_Tbl_Produkte_ProductID">
+          <End Role="Tbl_Produkte" Type="Self.Tbl_Produkte" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Galerie" Type="Self.Tbl_Galerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Produkte">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Galerie">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Produkte_Tbl_Kategorie_CategoryID">
+          <End Role="Tbl_Kategorie" Type="Self.Tbl_Kategorie" Multiplicity="0..1" />
+          <End Role="Tbl_Produkte" Type="Self.Tbl_Produkte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Kategorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Produkte">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Produkte_Tbl_Unterkategorie_SubCategoryID">
+          <End Role="Tbl_Unterkategorie" Type="Self.Tbl_Unterkategorie" Multiplicity="0..1" />
+          <End Role="Tbl_Produkte" Type="Self.Tbl_Produkte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Unterkategorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Produkte">
+              <PropertyRef Name="SubCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Produkte_Tbl_Users">
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="0..1" />
+          <End Role="Tbl_Produkte" Type="Self.Tbl_Produkte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Produkte">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_RestPassword_Tbl_Users">
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="1" />
+          <End Role="Tbl_RestPassword" Type="Self.Tbl_RestPassword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_RestPassword">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Unterkategorie_Tbl_Kategorie_CategoryID">
+          <End Role="Tbl_Kategorie" Type="Self.Tbl_Kategorie" Multiplicity="0..1" />
+          <End Role="Tbl_Unterkategorie" Type="Self.Tbl_Unterkategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Kategorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Unterkategorie">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_UnterkategorieGalerie_Tbl_Unterkategorie">
+          <End Role="Tbl_Unterkategorie" Type="Self.Tbl_Unterkategorie" Multiplicity="1" />
+          <End Role="Tbl_UnterkategorieGalerie" Type="Self.Tbl_UnterkategorieGalerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Unterkategorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_UnterkategorieGalerie">
+              <PropertyRef Name="SubCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Users_Tbl_Roles">
+          <End Role="Tbl_Roles" Type="Self.Tbl_Roles" Multiplicity="0..1" />
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbHolstentorModelStoreContainer">
+          <EntitySet Name="Tbl_Album" EntityType="Self.Tbl_Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_EmailConfirmed" EntityType="Self.Tbl_EmailConfirmed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Galerie" EntityType="Self.Tbl_Galerie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Hochladen" EntityType="Self.Tbl_Hochladen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Index" EntityType="Self.Tbl_Index" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_IndexET" EntityType="Self.Tbl_IndexET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Kategorie" EntityType="Self.Tbl_Kategorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Nachricht" EntityType="Self.Tbl_Nachricht" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Produkte" EntityType="Self.Tbl_Produkte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_RestPassword" EntityType="Self.Tbl_RestPassword" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Roles" EntityType="Self.Tbl_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Unterkategorie" EntityType="Self.Tbl_Unterkategorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_UnterkategorieGalerie" EntityType="Self.Tbl_UnterkategorieGalerie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Users" EntityType="Self.Tbl_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_EmailConfirmed_Tbl_Users" Association="Self.FK_Tbl_EmailConfirmed_Tbl_Users">
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+            <End Role="Tbl_EmailConfirmed" EntitySet="Tbl_EmailConfirmed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Galerie_Tbl_Produkte_ProductID" Association="Self.FK_Tbl_Galerie_Tbl_Produkte_ProductID">
+            <End Role="Tbl_Produkte" EntitySet="Tbl_Produkte" />
+            <End Role="Tbl_Galerie" EntitySet="Tbl_Galerie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Produkte_Tbl_Kategorie_CategoryID" Association="Self.FK_Tbl_Produkte_Tbl_Kategorie_CategoryID">
+            <End Role="Tbl_Kategorie" EntitySet="Tbl_Kategorie" />
+            <End Role="Tbl_Produkte" EntitySet="Tbl_Produkte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Produkte_Tbl_Unterkategorie_SubCategoryID" Association="Self.FK_Tbl_Produkte_Tbl_Unterkategorie_SubCategoryID">
+            <End Role="Tbl_Unterkategorie" EntitySet="Tbl_Unterkategorie" />
+            <End Role="Tbl_Produkte" EntitySet="Tbl_Produkte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Produkte_Tbl_Users" Association="Self.FK_Tbl_Produkte_Tbl_Users">
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+            <End Role="Tbl_Produkte" EntitySet="Tbl_Produkte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_RestPassword_Tbl_Users" Association="Self.FK_Tbl_RestPassword_Tbl_Users">
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+            <End Role="Tbl_RestPassword" EntitySet="Tbl_RestPassword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Unterkategorie_Tbl_Kategorie_CategoryID" Association="Self.FK_Tbl_Unterkategorie_Tbl_Kategorie_CategoryID">
+            <End Role="Tbl_Kategorie" EntitySet="Tbl_Kategorie" />
+            <End Role="Tbl_Unterkategorie" EntitySet="Tbl_Unterkategorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_UnterkategorieGalerie_Tbl_Unterkategorie" Association="Self.FK_Tbl_UnterkategorieGalerie_Tbl_Unterkategorie">
+            <End Role="Tbl_Unterkategorie" EntitySet="Tbl_Unterkategorie" />
+            <End Role="Tbl_UnterkategorieGalerie" EntitySet="Tbl_UnterkategorieGalerie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Users_Tbl_Roles" Association="Self.FK_Tbl_Users_Tbl_Roles">
+            <End Role="Tbl_Roles" EntitySet="Tbl_Roles" />
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbHolstentorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_Album">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NamePic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_EmailConfirmed">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserID" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Confirmed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tbl_Users" Relationship="Self.FK_Tbl_EmailConfirmed_Tbl_Users" FromRole="Tbl_EmailConfirmed" ToRole="Tbl_Users" />
+        </EntityType>
+        <EntityType Name="Tbl_Galerie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NamePic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Produkte" Relationship="Self.FK_Tbl_Galerie_Tbl_Produkte_ProductID" FromRole="Tbl_Galerie" ToRole="Tbl_Produkte" />
+        </EntityType>
+        <EntityType Name="Tbl_Hochladen">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageAbout" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageFooter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageGallery" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Index">
+          <Key>
+            <PropertyRef Name="IDIndex" />
+          </Key>
+          <Property Name="IDIndex" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypedText1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypedText2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="TypedText3" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="TypedText4" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="TypedText5" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_IndexET">
+          <Key>
+            <PropertyRef Name="IDIndex" />
+          </Key>
+          <Property Name="IDIndex" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmbedLinkGoogleMap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameSite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Kategorie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivePassive" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FontName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TitleCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Produkte" Relationship="Self.FK_Tbl_Produkte_Tbl_Kategorie_CategoryID" FromRole="Tbl_Kategorie" ToRole="Tbl_Produkte" />
+          <NavigationProperty Name="Tbl_Unterkategorie" Relationship="Self.FK_Tbl_Unterkategorie_Tbl_Kategorie_CategoryID" FromRole="Tbl_Kategorie" ToRole="Tbl_Unterkategorie" />
+        </EntityType>
+        <EntityType Name="Tbl_Nachricht">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Confirm" Type="Boolean" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DateUpdate" Type="DateTime" Precision="7" />
+          <Property Name="Text" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TextAdmin" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserIdRecive" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserIdSend" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_Produkte">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveInactive" Type="Boolean" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Price1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubCategoryID" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Galerie" Relationship="Self.FK_Tbl_Galerie_Tbl_Produkte_ProductID" FromRole="Tbl_Produkte" ToRole="Tbl_Galerie" />
+          <NavigationProperty Name="Tbl_Kategorie" Relationship="Self.FK_Tbl_Produkte_Tbl_Kategorie_CategoryID" FromRole="Tbl_Produkte" ToRole="Tbl_Kategorie" />
+          <NavigationProperty Name="Tbl_Unterkategorie" Relationship="Self.FK_Tbl_Produkte_Tbl_Unterkategorie_SubCategoryID" FromRole="Tbl_Produkte" ToRole="Tbl_Unterkategorie" />
+          <NavigationProperty Name="Tbl_Users" Relationship="Self.FK_Tbl_Produkte_Tbl_Users" FromRole="Tbl_Produkte" ToRole="Tbl_Users" />
+          <Property Name="Position" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tbl_RestPassword">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserID" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Users" Relationship="Self.FK_Tbl_RestPassword_Tbl_Users" FromRole="Tbl_RestPassword" ToRole="Tbl_Users" />
+        </EntityType>
+        <EntityType Name="Tbl_Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NormalizedName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_Users" Relationship="Self.FK_Tbl_Users_Tbl_Roles" FromRole="Tbl_Roles" ToRole="Tbl_Users" />
+        </EntityType>
+        <EntityType Name="Tbl_Unterkategorie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivePassive" Type="Boolean" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FontName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Subtitle1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subtitle2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subtitle3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TitleSubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Kategorie" Relationship="Self.FK_Tbl_Unterkategorie_Tbl_Kategorie_CategoryID" FromRole="Tbl_Unterkategorie" ToRole="Tbl_Kategorie" />
+          <NavigationProperty Name="Tbl_Produkte" Relationship="Self.FK_Tbl_Produkte_Tbl_Unterkategorie_SubCategoryID" FromRole="Tbl_Unterkategorie" ToRole="Tbl_Produkte" />
+          <NavigationProperty Name="Tbl_UnterkategorieGalerie" Relationship="Self.FK_Tbl_UnterkategorieGalerie_Tbl_Unterkategorie" FromRole="Tbl_Unterkategorie" ToRole="Tbl_UnterkategorieGalerie" />
+        </EntityType>
+        <EntityType Name="Tbl_UnterkategorieGalerie">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NamePic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubCategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Unterkategorie" Relationship="Self.FK_Tbl_UnterkategorieGalerie_Tbl_Unterkategorie" FromRole="Tbl_UnterkategorieGalerie" ToRole="Tbl_Unterkategorie" />
+        </EntityType>
+        <EntityType Name="Tbl_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NameFamily" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NormalizedEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="NormalizedUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tbl_EmailConfirmed" Relationship="Self.FK_Tbl_EmailConfirmed_Tbl_Users" FromRole="Tbl_Users" ToRole="Tbl_EmailConfirmed" />
+          <NavigationProperty Name="Tbl_Produkte" Relationship="Self.FK_Tbl_Produkte_Tbl_Users" FromRole="Tbl_Users" ToRole="Tbl_Produkte" />
+          <NavigationProperty Name="Tbl_RestPassword" Relationship="Self.FK_Tbl_RestPassword_Tbl_Users" FromRole="Tbl_Users" ToRole="Tbl_RestPassword" />
+          <NavigationProperty Name="Tbl_Roles" Relationship="Self.FK_Tbl_Users_Tbl_Roles" FromRole="Tbl_Users" ToRole="Tbl_Roles" />
+        </EntityType>
+        <Association Name="FK_Tbl_EmailConfirmed_Tbl_Users">
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="1" />
+          <End Role="Tbl_EmailConfirmed" Type="Self.Tbl_EmailConfirmed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_EmailConfirmed">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Galerie_Tbl_Produkte_ProductID">
+          <End Role="Tbl_Produkte" Type="Self.Tbl_Produkte" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Galerie" Type="Self.Tbl_Galerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Produkte">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Galerie">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Produkte_Tbl_Kategorie_CategoryID">
+          <End Role="Tbl_Kategorie" Type="Self.Tbl_Kategorie" Multiplicity="0..1" />
+          <End Role="Tbl_Produkte" Type="Self.Tbl_Produkte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Kategorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Produkte">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Unterkategorie_Tbl_Kategorie_CategoryID">
+          <End Role="Tbl_Kategorie" Type="Self.Tbl_Kategorie" Multiplicity="0..1" />
+          <End Role="Tbl_Unterkategorie" Type="Self.Tbl_Unterkategorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Kategorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Unterkategorie">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Produkte_Tbl_Unterkategorie_SubCategoryID">
+          <End Role="Tbl_Unterkategorie" Type="Self.Tbl_Unterkategorie" Multiplicity="0..1" />
+          <End Role="Tbl_Produkte" Type="Self.Tbl_Produkte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Unterkategorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Produkte">
+              <PropertyRef Name="SubCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Produkte_Tbl_Users">
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="0..1" />
+          <End Role="Tbl_Produkte" Type="Self.Tbl_Produkte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Produkte">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_RestPassword_Tbl_Users">
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="1" />
+          <End Role="Tbl_RestPassword" Type="Self.Tbl_RestPassword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_RestPassword">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Users_Tbl_Roles">
+          <End Role="Tbl_Roles" Type="Self.Tbl_Roles" Multiplicity="0..1" />
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_UnterkategorieGalerie_Tbl_Unterkategorie">
+          <End Role="Tbl_Unterkategorie" Type="Self.Tbl_Unterkategorie" Multiplicity="1" />
+          <End Role="Tbl_UnterkategorieGalerie" Type="Self.Tbl_UnterkategorieGalerie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Unterkategorie">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_UnterkategorieGalerie">
+              <PropertyRef Name="SubCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbHolstentorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Album" EntityType="Self.Tbl_Album" />
+          <EntitySet Name="Tbl_EmailConfirmed" EntityType="Self.Tbl_EmailConfirmed" />
+          <EntitySet Name="Tbl_Galerie" EntityType="Self.Tbl_Galerie" />
+          <EntitySet Name="Tbl_Hochladen" EntityType="Self.Tbl_Hochladen" />
+          <EntitySet Name="Tbl_Index" EntityType="Self.Tbl_Index" />
+          <EntitySet Name="Tbl_IndexET" EntityType="Self.Tbl_IndexET" />
+          <EntitySet Name="Tbl_Kategorie" EntityType="Self.Tbl_Kategorie" />
+          <EntitySet Name="Tbl_Nachricht" EntityType="Self.Tbl_Nachricht" />
+          <EntitySet Name="Tbl_Produkte" EntityType="Self.Tbl_Produkte" />
+          <EntitySet Name="Tbl_RestPassword" EntityType="Self.Tbl_RestPassword" />
+          <EntitySet Name="Tbl_Roles" EntityType="Self.Tbl_Roles" />
+          <EntitySet Name="Tbl_Unterkategorie" EntityType="Self.Tbl_Unterkategorie" />
+          <EntitySet Name="Tbl_UnterkategorieGalerie" EntityType="Self.Tbl_UnterkategorieGalerie" />
+          <EntitySet Name="Tbl_Users" EntityType="Self.Tbl_Users" />
+          <AssociationSet Name="FK_Tbl_EmailConfirmed_Tbl_Users" Association="Self.FK_Tbl_EmailConfirmed_Tbl_Users">
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+            <End Role="Tbl_EmailConfirmed" EntitySet="Tbl_EmailConfirmed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Galerie_Tbl_Produkte_ProductID" Association="Self.FK_Tbl_Galerie_Tbl_Produkte_ProductID">
+            <End Role="Tbl_Produkte" EntitySet="Tbl_Produkte" />
+            <End Role="Tbl_Galerie" EntitySet="Tbl_Galerie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Produkte_Tbl_Kategorie_CategoryID" Association="Self.FK_Tbl_Produkte_Tbl_Kategorie_CategoryID">
+            <End Role="Tbl_Kategorie" EntitySet="Tbl_Kategorie" />
+            <End Role="Tbl_Produkte" EntitySet="Tbl_Produkte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Unterkategorie_Tbl_Kategorie_CategoryID" Association="Self.FK_Tbl_Unterkategorie_Tbl_Kategorie_CategoryID">
+            <End Role="Tbl_Kategorie" EntitySet="Tbl_Kategorie" />
+            <End Role="Tbl_Unterkategorie" EntitySet="Tbl_Unterkategorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Produkte_Tbl_Unterkategorie_SubCategoryID" Association="Self.FK_Tbl_Produkte_Tbl_Unterkategorie_SubCategoryID">
+            <End Role="Tbl_Unterkategorie" EntitySet="Tbl_Unterkategorie" />
+            <End Role="Tbl_Produkte" EntitySet="Tbl_Produkte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Produkte_Tbl_Users" Association="Self.FK_Tbl_Produkte_Tbl_Users">
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+            <End Role="Tbl_Produkte" EntitySet="Tbl_Produkte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_RestPassword_Tbl_Users" Association="Self.FK_Tbl_RestPassword_Tbl_Users">
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+            <End Role="Tbl_RestPassword" EntitySet="Tbl_RestPassword" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Users_Tbl_Roles" Association="Self.FK_Tbl_Users_Tbl_Roles">
+            <End Role="Tbl_Roles" EntitySet="Tbl_Roles" />
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_UnterkategorieGalerie_Tbl_Unterkategorie" Association="Self.FK_Tbl_UnterkategorieGalerie_Tbl_Unterkategorie">
+            <End Role="Tbl_Unterkategorie" EntitySet="Tbl_Unterkategorie" />
+            <End Role="Tbl_UnterkategorieGalerie" EntitySet="Tbl_UnterkategorieGalerie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbHolstentorModelStoreContainer" CdmEntityContainer="DbHolstentorEntities">
+          <EntitySetMapping Name="Tbl_Album">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Album">
+              <MappingFragment StoreEntitySet="Tbl_Album">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="NamePic" ColumnName="NamePic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_EmailConfirmed">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_EmailConfirmed">
+              <MappingFragment StoreEntitySet="Tbl_EmailConfirmed">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Galerie">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Galerie">
+              <MappingFragment StoreEntitySet="Tbl_Galerie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="NamePic" ColumnName="NamePic" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Hochladen">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Hochladen">
+              <MappingFragment StoreEntitySet="Tbl_Hochladen">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ImageAbout" ColumnName="ImageAbout" />
+                <ScalarProperty Name="ImageFooter" ColumnName="ImageFooter" />
+                <ScalarProperty Name="ImageGallery" ColumnName="ImageGallery" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Index">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Index">
+              <MappingFragment StoreEntitySet="Tbl_Index">
+                <ScalarProperty Name="IDIndex" ColumnName="IDIndex" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TypedText1" ColumnName="TypedText1" />
+                <ScalarProperty Name="TypedText2" ColumnName="TypedText2" />
+                <ScalarProperty Name="TypedText3" ColumnName="TypedText3" />
+                <ScalarProperty Name="TypedText4" ColumnName="TypedText4" />
+                <ScalarProperty Name="TypedText5" ColumnName="TypedText5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_IndexET">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_IndexET">
+              <MappingFragment StoreEntitySet="Tbl_IndexET">
+                <ScalarProperty Name="IDIndex" ColumnName="IDIndex" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmbedLinkGoogleMap" ColumnName="EmbedLinkGoogleMap" />
+                <ScalarProperty Name="NameSite" ColumnName="NameSite" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Kategorie">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Kategorie">
+              <MappingFragment StoreEntitySet="Tbl_Kategorie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ActivePassive" ColumnName="ActivePassive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FontName" ColumnName="FontName" />
+                <ScalarProperty Name="TitleCategory" ColumnName="TitleCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Nachricht">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Nachricht">
+              <MappingFragment StoreEntitySet="Tbl_Nachricht">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Confirm" ColumnName="Confirm" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DateUpdate" ColumnName="DateUpdate" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="TextAdmin" ColumnName="TextAdmin" />
+                <ScalarProperty Name="UserIdRecive" ColumnName="UserIdRecive" />
+                <ScalarProperty Name="UserIdSend" ColumnName="UserIdSend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Produkte">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Produkte">
+              <MappingFragment StoreEntitySet="Tbl_Produkte">
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ActiveInactive" ColumnName="ActiveInactive" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price1" ColumnName="Price1" />
+                <ScalarProperty Name="Price2" ColumnName="Price2" />
+                <ScalarProperty Name="Price3" ColumnName="Price3" />
+                <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_RestPassword">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_RestPassword">
+              <MappingFragment StoreEntitySet="Tbl_RestPassword">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Roles">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Roles">
+              <MappingFragment StoreEntitySet="Tbl_Roles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NormalizedName" ColumnName="NormalizedName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Unterkategorie">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Unterkategorie">
+              <MappingFragment StoreEntitySet="Tbl_Unterkategorie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ActivePassive" ColumnName="ActivePassive" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FontName" ColumnName="FontName" />
+                <ScalarProperty Name="Subtitle1" ColumnName="Subtitle1" />
+                <ScalarProperty Name="Subtitle2" ColumnName="Subtitle2" />
+                <ScalarProperty Name="Subtitle3" ColumnName="Subtitle3" />
+                <ScalarProperty Name="TitleSubCategory" ColumnName="TitleSubCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_UnterkategorieGalerie">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_UnterkategorieGalerie">
+              <MappingFragment StoreEntitySet="Tbl_UnterkategorieGalerie">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="NamePic" ColumnName="NamePic" />
+                <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Users">
+            <EntityTypeMapping TypeName="DbHolstentorModel.Tbl_Users">
+              <MappingFragment StoreEntitySet="Tbl_Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameFamily" ColumnName="NameFamily" />
+                <ScalarProperty Name="NormalizedEmail" ColumnName="NormalizedEmail" />
+                <ScalarProperty Name="NormalizedUserName" ColumnName="NormalizedUserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Restaurant am Holstentor Lübeck";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Restaurant.Models.Repository.HomeRep ivm = new Restaurant.Models.Repository.HomeRep();
+    var qivm = ivm.GetIndexSelect();
+    var qivmheader = ivm.GetIndexHeaderSelect();
+    var qupload = ivm.GetHochladen();
+    string tel = qivmheader.PhoneNumber.Replace("/", "").ToString();
+}
+
+<!-- Header -->
+@Html.Partial("P_Header")
+<!-- End of Header -->
+<!-- Main Content -->
+<main class="main minh-100vh">
+    <!-- Section -->
+    <section class="py-0 overflow-hidden text-center">
+        <div class="bg-container overlay overlay-60 parallax" data-rellax-percentage="0.5">
+            <video class="bg-video" autoplay loop muted>
+                <source src="~/wwwroot/assets/img/backgrounds/upload/video/@qupload.Video" type="video/mp4" />
+            </video>
+        </div>
+        <div class="container">
+            <div class="row h-100vh align-items-center">
+                <div class="col" data-aos="zoom-out" data-aos-duration="1000">
+                    <h1 class="mb-4 text-web fs-2 fs-lg-3"><span id="typed"></span></h1>
+                    <h1 class="mb-4 text-white fs-1 fs-lg-2">@qivm.Title</h1>
+                    <span class="menu-toggle btn btn-primary mx-2 px-3" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000" style="width: auto; height: auto;"><i class="fas fa-list mr-2"></i>Menü</span>
+                    <a data-toggle="modal" data-target="#Landkarte" class="btn btn-light px-5 mx-2" data-aos="fade-down" data-aos-delay="100" data-aos-duration="1000"><i class="fas fa-map-marker-alt mr-2"></i>Landkarte</a>
+                    <br />
+                    <span class="navbar-text flex-fill text-white text-center mt-3">
+                        <i class="fas fa-envelope ml-2"></i><a href="mailto:@qivmheader.Email" class="text-white"><b class="pl-2 text-white">@qivmheader.Email</b></a><br /><i class="fas fa-phone ml-2"></i><a href="tel:@tel" class="text-white"><b class="pl-2 text-white">@qivmheader.PhoneNumber</b></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Section -->
+</main>
+<!-- End of Main Content -->
+<!-- JavaScript -->
+@Html.Partial("P_Typed")
+<!-- End of JavaScript -->
+<script type="text/javascript">
+
+    var typed = new Typed('#typed', {
+        strings: ['@qivm.TypedText1','@qivm.TypedText2','@qivm.TypedText3','@qivm.TypedText4','@qivm.TypedText5'],
+        typeSpeed: 100,
+        backSpeed: 105,
+        backDelay: 500,
+        startDelay: 1000,
+        cursorChar: '_',
+        loop: true,
+    });
+</script>

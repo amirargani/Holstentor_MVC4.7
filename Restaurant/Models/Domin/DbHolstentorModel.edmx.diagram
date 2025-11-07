@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0990beea72184b05850964a3e25a3062" Name="Diagram1">
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Album" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_EmailConfirmed" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Galerie" Width="1.5" PointX="10.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Hochladen" Width="1.5" PointX="8.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Index" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_IndexET" Width="1.5" PointX="7.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Kategorie" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Nachricht" Width="1.5" PointX="9.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Produkte" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_RestPassword" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Roles" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Unterkategorie" Width="1.5" PointX="6" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_UnterkategorieGalerie" Width="1.5" PointX="8.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbHolstentorModel.Tbl_Users" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="DbHolstentorModel.FK_Tbl_EmailConfirmed_Tbl_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DbHolstentorModel.FK_Tbl_Galerie_Tbl_Produkte_ProductID" ManuallyRouted="false" />
+        <AssociationConnector Association="DbHolstentorModel.FK_Tbl_Produkte_Tbl_Kategorie_CategoryID" ManuallyRouted="false" />
+        <AssociationConnector Association="DbHolstentorModel.FK_Tbl_Unterkategorie_Tbl_Kategorie_CategoryID" ManuallyRouted="false" />
+        <AssociationConnector Association="DbHolstentorModel.FK_Tbl_Produkte_Tbl_Unterkategorie_SubCategoryID" ManuallyRouted="false" />
+        <AssociationConnector Association="DbHolstentorModel.FK_Tbl_Produkte_Tbl_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DbHolstentorModel.FK_Tbl_RestPassword_Tbl_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DbHolstentorModel.FK_Tbl_Users_Tbl_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="DbHolstentorModel.FK_Tbl_UnterkategorieGalerie_Tbl_Unterkategorie" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

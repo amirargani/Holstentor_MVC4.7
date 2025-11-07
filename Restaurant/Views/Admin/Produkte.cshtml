@@ -1,0 +1,247 @@
+﻿@model  IEnumerable<Restaurant.Models.Domin.Tbl_Produkte>
+@{
+    ViewBag.Title = "Meine Verwaltung | Produkte";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    //Layout = null;
+    Restaurant.Models.Repository.HomeRep ivm = new Restaurant.Models.Repository.HomeRep();
+    var qivm = ivm.GetIndexHeaderSelect();
+    int ii = 0;
+    var qcategory = ivm.GetCategoryLink().ToList();
+    var qsubcategory = ivm.GetSubCategoryLink().ToList();
+}
+
+@Html.Partial("P_HeaderBG")
+<!-- Main Content -->
+<main class="main">
+    <!-- Section -->
+    <section class="py-0">
+        <div class="bg-web">
+            <!-- Section -->
+            <section class="py-0 pb-3">
+                <div class="jumbotron jumbotron-fluid bg-rosa py-7">
+                    <div class="container">
+                        <!---fulid p-5-->
+                        <h1 class="text-web fs-3 fs-lg-5 mt-5" data-aos="fade-down" data-aos-duration="1000">Meine Verwaltung</h1>
+                        <h5 class="text-black mb-2" data-aos="fade-down" data-aos-duration="1100">Produkte</h5>
+                        <div class="tab-content py-3 px-3 px-sm-0">
+                            <div class="tab-pane fade show active">
+                                <!-- Pagination -->
+                                <div class="col-12">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li><a class="btn btn-success mr-3" href="/Admin/ProduktKategorie"><i class="fas fa-plus-circle mr-2"></i>Hinzufügen</a></li>
+                                            <li><a class="btn btn-secondary mr-3" href="/Admin"><i class="fas fa-chevron-circle-left mr-2"></i>Meine Verwaltung</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- End of Pagination -->
+                                <div class="p-5">
+                                    <div class="table-responsive mb-2">
+                                        @using (Html.BeginForm("Produkte", "Admin", FormMethod.Post))
+                                        {
+                                            <input class="btn btn-info mr-3" type="submit" value="Tabelle aktulisieren" />
+                                            <br /><br /><br />
+                                            int i = 1;
+                                            if (Model.Count() > 0)
+                                            {
+                                                <table id="tblLocations" class="table table-light text-center">
+                                                    @{
+                                                        foreach (var itemsubcategory in qsubcategory)
+                                                        {
+                                                            foreach (var item in Model.Where(a => a.CategoryID == itemsubcategory.CategoryID).OrderBy(a => a.Position))
+                                                            {
+                                                                var qgalerie = item.Tbl_Galerie.Where(a => a.ProductID == item.ID).FirstOrDefault();
+                                                                string bg = "";
+                                                                if (item.ActiveInactive == false)
+                                                                {
+                                                                    bg = "background-color: #ffeaed;";
+                                                                }
+                                                                if (item.SubCategoryID == itemsubcategory.ID)
+                                                                {
+                                                                    if (ii < 1)
+                                                                    {
+                                                                        <tr class="bg-web text-white font-weight-bold" style="font-size: 0.73rem !important;">
+                                                                            <th scope="col">#</th>
+                                                                            <th scope="col">
+                                                                                @if (@item.Tbl_Kategorie.TitleCategory != null)
+                                                                                {
+                                                                                    <small>@item.Tbl_Kategorie.TitleCategory</small>
+                                                                                }
+                                                                                @*@item.Tbl_Kategorie.TitleCategory*@ | @item.Tbl_Unterkategorie.TitleSubCategory
+                                                                            </th>
+                                                                            <th scope="col">Foto</th>
+                                                                            <th scope="col">@item.Tbl_Unterkategorie.Subtitle1</th>
+                                                                            <th scope="col">@item.Tbl_Unterkategorie.Subtitle2</th>
+                                                                            <th scope="col">@item.Tbl_Unterkategorie.Subtitle3</th>
+                                                                            <th scope="col"><span class="text-success">Aktiv</span>/<span class="text-danger">Inaktiv</span></th>
+                                                                            <th scope="col"><i class="fas fa-edit text-warning"></i></th>
+                                                                            <th scope="col"><i class="fas fa-image text-white"></i></th>
+                                                                            @*<th scope="col"><i class="fas fa-trash text-danger"></i></th>*@
+                                                                        </tr>
+                                                                        ii++;
+                                                                    }
+                                                                    <tr class="font-weight-bold" style="font-size: 0.83rem !important; cursor: move; @bg">
+                                                                        <td>
+                                                                            <form><span style="display: none;"></span></form>
+                                                                            @i
+                                                                            <input type="hidden" name="locationId" value="@item.ID" />
+                                                                        </td>
+                                                                        <td>
+                                                                            @item.Title
+                                                                        </td>
+                                                                        <td>
+                                                                            @if (qgalerie != null)
+                                                                            {
+                                                                                <a data-fancybox="gallery" data-caption="@qgalerie.NamePic" href="../wwwroot/assets/img/backgrounds/gallery/@qgalerie.Image"><i class="fas fa-image text-success"></i></a>
+                                                                            }
+                                                                            @if (qgalerie == null)
+                                                                            {
+                                                                                <i class="fas fa-image text-black"></i>
+                                                                            }
+                                                                        </td>
+                                                                        @if (item.Price1 != null)
+                                                                        {
+                                                                            if (item.Price1 == "0" || item.Price1 == "-")
+                                                                            {
+                                                                                <td class="text-white">@item.Price1</td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td style="color: #005dc9;">@item.Price1</td>
+                                                                            }
+                                                                        }
+                                                                        <td style="color: #005dc9;">
+                                                                            @if (item.Price2 != null)
+                                                                            {
+                                                                                @item.Price2
+                                                                            }
+                                                                        </td>
+                                                                        <td style="color: #005dc9;">
+                                                                            @if (item.Price3 != null)
+                                                                            {
+                                                                                @item.Price3
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            @{
+                                                                                if (item.ActiveInactive == false)
+                                                                                {
+                                                                                    @*<a href="/Admin/ProduktAktiv?id=@item.ID" class="btn btn-success" style="width: 50px;"><i class="fas fa-check"></i></a>*@
+                                                                                    <form class="" action="/Admin/ProduktAktiv" method="post">
+                                                                                        <input type="hidden" for="@item.ID" name="ID" value="@item.ID" />
+                                                                                        <button type="submit" class="btn btn-success" style="width: 50px;"><i class="fas fa-check"></i></button>
+                                                                                    </form>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    @*<a href="/Admin/ProduktInaktiv?id=@item.ID" class="btn btn-danger" style="width: 50px;"><i class="fas fa-times"></i></a>*@
+                                                                                    <form class="" action="/Admin/ProduktInaktiv" method="post">
+                                                                                        <input type="hidden" for="@item.ID" name="ID" value="@item.ID" />
+                                                                                        <button type="submit" class="btn btn-danger" style="width: 50px;"><i class="fas fa-times"></i></button>
+                                                                                    </form>
+                                                                                }
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            <form class="" action="/Admin/ProdukteBearbeiten" method="post">
+                                                                                <input type="hidden" for="@item.ID" name="id" value="@item.ID" />
+                                                                                <button type="submit" class="btn btn-warning" style="width: 50px;"><i class="fas fa-edit"></i></button>
+                                                                            </form>
+                                                                        </td>
+                                                                        <td>
+                                                                            @{
+                                                                                if (qgalerie != null)
+                                                                                {
+                                                                                    <form class="" action="/Admin/ProduktgalerieBearbeiten" method="post">
+                                                                                        <input type="hidden" for="@item.ID" name="id" value="@item.ID" />
+                                                                                        <button type="submit" class="btn btn-info" style="width: 50px;"><i class="fas fa-edit"></i></button>
+                                                                                    </form>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <form class="" action="/Admin/ProduktgalerieErstellen" method="post">
+                                                                                        <input type="hidden" for="@item.ID" name="id" value="@item.ID" />
+                                                                                        <button type="submit" class="btn btn-success" style="width: 50px;"><i class="fas fa-image"></i></button>
+                                                                                    </form>
+                                                                                }
+                                                                            }
+                                                                        </td>
+                                                                        @*<td>
+                                                                            @{
+                                                                                if (qgalerie != null)
+                                                                                {
+                                                                                    <form class="" action="/Admin/ProduktgalerieLöschenConfirmed" method="post">
+                                                                                        <input type="hidden" for="@item.ID" name="id" value="@item.ID" />
+                                                                                        <button type="submit" class="btn btn-danger" style="width: 50px;"><i class="fas fa-trash"></i></button>
+                                                                                    </form>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <span class="text-black">-</span>
+                                                                                }
+                                                                            }
+                                                                        </td>*@
+                                                                    </tr>
+                                                                    i++;
+                                                                }
+                                                            }
+                                                            ii--;
+                                                        }
+                                                    }
+                                                </table>
+                                            }
+                                            <br />
+                                            <input class="btn btn-info mr-3" type="submit" value="Tabelle aktulisieren" />
+                                            <br /><br />
+                                        }
+                                        <!-- Pagination -->
+                                        <div class="col-12">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    @{
+                                                        if (Model.Count() > 0)
+                                                        {
+                                                            ViewBag.TakeNumber = ViewData["ProductsTakeNumber"];
+                                                            if (Model.Count() >= ViewBag.TakeNumber) { }
+                                                            ViewBag.CountProducts = ViewData["ProductsCount"];
+                                                            double Take = ViewBag.TakeNumber;
+                                                            double Count = ViewBag.CountProducts;
+                                                            double Div = Math.Ceiling(Count / Take);
+                                                            for (int j = 1; j <= Div; j++)
+                                                            {
+                                                                //string ac = "";
+                                                                string di = "";
+                                                                string bg = "";
+                                                                string tx = "";
+                                                                string cu = "pointer";
+
+                                                                if (ViewBag.ProductsPage == j)
+                                                                {
+                                                                    //ac = "active";
+                                                                    di = "disabled";
+                                                                    bg = "bg-dark";
+                                                                    tx = "text-white";
+                                                                    cu = "not-allowed";
+                                                                }
+                                                                <li class="page-item @di"><a class="page-link @bg @tx" href="/Admin/Produkte?page=@j.ToString()" style="cursor:@cu">@j.ToString()</a></li>
+                                                            }
+                                                        }
+                                                    }
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                        <!-- End of Pagination -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="text-white mb-2 text-center" data-aos="fade-up" data-aos-duration="1600"><b>@qivm.NameSite</b></h5>
+            </section>
+            <!-- End of Section -->
+        </div>
+    </section>
+</main>
+<!-- End of Main Content -->
+@Html.Partial("P_Footer")

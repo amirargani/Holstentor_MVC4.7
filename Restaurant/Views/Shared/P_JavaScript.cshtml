@@ -1,0 +1,37 @@
+﻿<!-- Core Javascripts -->
+<script src="~/wwwroot/assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="~/wwwroot/assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="~/wwwroot/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Vendor Javascripts -->
+<script src="~/wwwroot/assets/vendor/rellax/rellax.min.js"></script>
+<script src="~/wwwroot/assets/vendor/fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
+<script src="~/wwwroot/assets/vendor/aos/dist/aos.js"></script>
+
+<!-- Theme Javascripts -->
+<script src="~/wwwroot/dist/js/theme.min.js"></script>
+
+
+<!--Validate-->
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#tblLocations").sortable({
+            items: 'tr:not(tr:first-child)',
+            cursor: 'pointer',
+            axis: 'y',
+            dropOnEmpty: false,
+            start: function (e, ui) {
+                ui.item.addClass("selected");
+            },
+            stop: function (e, ui) {
+                ui.item.removeClass("selected");
+            },
+            receive: function (e, ui) {
+                $(this).find("tbody").append(ui.item);
+            }
+        });
+    });
+</script>

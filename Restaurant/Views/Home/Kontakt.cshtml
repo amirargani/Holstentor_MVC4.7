@@ -1,0 +1,75 @@
+﻿@model Restaurant.Models.ViewModels.MessageUserViewModel
+@{
+    ViewData["Title"] = "Kontakt | Restaurant am Holstentor Lübeck";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Restaurant.Models.Repository.HomeRep ivm = new Restaurant.Models.Repository.HomeRep();
+    var qivm = ivm.GetIndexHeaderSelect();
+}
+
+@Html.Partial("P_HeaderBG")
+<!-- Main Content -->
+<main class="main minh-100vh">
+    <!-- Section -->
+    <section class="py-0 overflow-hidden text-center">
+        <div class="bg-container overlay overlay-60" data-rellax-percentage="0.5">
+            <iframe src="@qivm.EmbedLinkGoogleMap" style="width: 100%; min-height: 130vh; border:0; margin-top: -10vh;" allowfullscreen></iframe>
+        </div>
+        <div class="container">
+            <div class="row h-100vh align-items-center">
+                <div class="col" data-aos="zoom-out" data-aos-duration="1000">
+                    <h1 class="mb-4 text-white fs-2 fs-lg-4">Kontakt</h1>
+                    <h1 class="mb-4 text-white fs-1 fs-lg-2">@qivm.NameSite</h1>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-light mb-4" data-aos="fade-down" data-aos-duration="1100" data-toggle="modal" data-target="#Landkarte">Landkarte öffnen<i class="zmdi zmdi-map ml-2"></i></button>
+                    <!-- End of Button trigger modal -->
+                    <br />
+                    <a href="#section-2" class="px-3" data-smooth-scroll data-smooth-scroll-hash="false"><i class="zmdi zmdi-long-arrow-down zmdi-hc-2x text-white"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Section -->
+    <!-- Section -->
+    <section id="section-2" class="py-0">
+        <div class="bg-web">
+            <!-- Section -->
+            <section class="py-0 pb-3">
+                <div class="jumbotron jumbotron-fluid bg-rosa py-7">
+                    <div class="container">
+                        <h1 class="text-web fs-3 fs-lg-5 mt-5" data-aos="fade-down" data-aos-duration="1200">Kontakt</h1>
+                        <h5 class="text-black mb-2" data-aos="fade-down" data-aos-duration="1300">@qivm.NameSite</h5>
+                        <p class="text-web fs-1" data-aos="slide-left" data-aos-duration="1400"><i class="zmdi zmdi-map zmdi-hc-fw mr-1"></i><b>Adresse: </b>@qivm.Street @qivm.Number / @qivm.PostCode @qivm.City</p>
+                        <h5 class="text-web fs-1" data-aos="slide-right" data-aos-duration="1500"><i class="zmdi zmdi-phone zmdi-hc-fw mr-1"></i><b>Telefonnummer: </b><a href="tel:@qivm.PhoneNumber" class="text-web">@qivm.PhoneNumber</a></h5>
+                        <h5 class="text-web fs-1" data-aos="zoom-in-down" data-aos-duration="1600"><i class="zmdi zmdi-email zmdi-hc-fw mr-1"></i><b>E-Mail-Adresse: </b><a href="mailto:@qivm.Email" class="text-web">@qivm.Email</a></h5>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-light mb-4" data-aos="fade-right" data-aos-duration="1200" data-toggle="modal" data-target="#Landkarte">Landkarte öffnen<i class="zmdi zmdi-map ml-2"></i></button>
+                        <!-- End of Button trigger modal -->
+                        <hr />
+                        <form class="col px-5 px-lg-8 py-6 py-lg-0" action="/Home/MessageUser" method="post">
+                            <div class="form-group mb-4">
+                                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ihr Name: Bitte geben Sie Ihren Namen ein." } })
+                                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group mb-4">
+                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Ihre E-Mail: Bitte geben Sie Ihre eigene E-Mail-Adresse an." } })
+                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group mb-4">
+                                @Html.TextAreaFor(model => model.message, new { @class = "form-control", @rows = "8", @placeholder = "Ihre Nachricht: Bitte geben Sie den Text Ihrer Anfrage ein." })
+                                @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-danger" })
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Senden<i class="zmdi zmdi-mail-send ml-2"></i></button>
+                        </form>
+                        <hr />
+                    </div>
+                </div>
+                <h5 class="text-white mb-2 text-center" data-aos="fade-up" data-aos-duration="1700"><b>@qivm.NameSite</b></h5>
+            </section>
+            <!-- End of Section -->
+        </div>
+    </section>
+    <!-- End of Section -->
+</main>
+<!-- End of Main Content -->
+@Html.Partial("P_Location")
+@Html.Partial("P_Footer")

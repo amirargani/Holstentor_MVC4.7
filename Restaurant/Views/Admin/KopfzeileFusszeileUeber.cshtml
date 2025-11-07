@@ -1,0 +1,91 @@
+﻿@model Restaurant.Models.Domin.Tbl_IndexET
+@{
+    ViewBag.Title = "Meine Verwaltung | Kopfzeile/Fußzeile/Über";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Restaurant.Models.Repository.HomeRep ivm = new Restaurant.Models.Repository.HomeRep();
+    var qivm = ivm.GetIndexHeaderSelect();
+}
+
+@Html.Partial("P_HeaderBG")
+<!-- Main Content -->
+<main class="main">
+    <!-- Section -->
+    <section class="py-0">
+        <div class="bg-web">
+            <!-- Section -->
+            <section class="py-0 pb-3">
+                <div class="jumbotron jumbotron-fluid bg-rosa py-7">
+                    <div class="container">
+                        <h1 class="text-web fs-3 fs-lg-5 mt-5" data-aos="fade-down" data-aos-duration="1000">Meine Verwaltung</h1>
+                        <h5 class="text-black mb-2" data-aos="fade-down" data-aos-duration="1100">Bearbeiten Sie die Informationen</h5>
+                        <div class="tab-content py-3 px-3 px-sm-0">
+                            <!-- Pagination -->
+                            <div class="col-12">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li><a class="btn btn-secondary mr-3" href="/Admin"><i class="fas fa-chevron-circle-left mr-2"></i>Meine Verwaltung</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- End of Pagination -->
+                            <div class="tab-pane fade show active">
+                                <div class="container">
+                                    <form class="col px-5 px-lg-8 py-6 py-lg-0 mt-3" action="/Admin/KopfzeileFusszeileUeberConfirmed" method="post">
+                                        <input type="hidden" for="@Model.IDIndex" name="id" value="@Model.IDIndex" />
+                                        <input type="hidden" for="@Model.IDIndex" name="IDIndex" value="@Model.IDIndex" />
+                                        <div class="form-group mb-4">
+                                            @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Straße", @Value = @Model.Street } })
+                                            @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Nummer", @Value = @Model.Number } })
+                                            @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Postleitzahl", @Value = @Model.PostCode } })
+                                            @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Stadt", @Value = @Model.City } })
+                                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Land", @Value = @Model.Country } })
+                                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control form-control-lg", @placeholder = "Beschreibung", @Value = @Model.Description })
+                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                        </div>
+                                        @*<div class="form-group mb-4">
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "E-Mail-Adresse", @Value = @Model.Email } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </div>*@
+                                        <div class="form-group mb-4">
+                                            @Html.EditorFor(model => model.EmbedLinkGoogleMap, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "EmbedLinkGoogleMap", @Value = @Model.EmbedLinkGoogleMap } })
+                                            @Html.ValidationMessageFor(model => model.EmbedLinkGoogleMap, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            @Html.EditorFor(model => model.NameSite, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Websitename", @Value = @Model.NameSite } })
+                                            @Html.ValidationMessageFor(model => model.NameSite, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Telefonnummer", @Value = @Model.PhoneNumber } })
+                                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                        </div>
+                                        <button type="submit" class="btn btn-lg btn-success btn-block mb-4 text-capitalize">Bearbeiten<i class="fas fa-edit ml-2"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="text-white mb-2 text-center" data-aos="fade-up" data-aos-duration="1200"><b>@qivm.NameSite</b></h5>
+            </section>
+            <!-- End of Section -->
+        </div>
+    </section>
+    <!-- End of Section -->
+</main>
+<!-- End of Main Content -->
+@Html.Partial("P_Footer")

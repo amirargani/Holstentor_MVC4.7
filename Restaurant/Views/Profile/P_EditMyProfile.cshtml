@@ -1,0 +1,79 @@
+﻿@model Restaurant.Models.ViewModels.UserViewModel
+@{
+    Restaurant.Models.Repository.ProfileRep prorep = new Restaurant.Models.Repository.ProfileRep();
+}
+
+@{
+    if (Session["EmailUser"] != null)
+    {
+        string username = Session["EmailUser"].ToString();
+        <div class="container-fluid">
+            <div class="row p-5">
+                <div class="col-lg-3">
+                    <h5 class="text-web mb-2">E-Mail-Addresse:</h5>
+                    <input type="email" class="form-control form-control-lg" placeholder="E-Mail-Addresse" asp-for="Email" name="Email" value="@prorep.GetUser(username).Email" disabled>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="text-web mb-2">Vorname:</h5>
+                    <input type="text" class="form-control form-control-lg" placeholder="Vorname" asp-for="Name" name="Name" value="@prorep.GetUser(username).Name" disabled>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="text-web mb-2">Familienname:</h5>
+                    <input type="text" class="form-control form-control-lg" placeholder="Familienname" asp-for="NameFamily" name="NameFamily" value="@prorep.GetUser(username).NameFamily" disabled>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="text-web mb-2">Telefonnummer:</h5>
+                    <input type="tel" class="form-control form-control-lg" placeholder="Telefonnummer" asp-for="PhoneNumber" name="PhoneNumber" value="@prorep.GetUser(username).PhoneNumber" disabled>
+                </div>
+                <div class="col-lg-5 mt-4">
+                </div>
+                <div class="col-lg-2 mt-4">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-lg btn-primary btn-block mb-4" data-toggle="modal" data-target="#Aktualisieren">Aktualisieren<i class="fas fa-user-edit ml-2"></i></button>
+                    <!-- End of Button trigger modal -->
+                </div>
+                <div class="col-lg-5 mt-4">
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="Aktualisieren" tabindex="-1" role="dialog" aria-labelledby="Aktualisieren" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Mein Profil</h5>
+                    </div>
+                    <div class="modal-body">
+                        @using (Html.BeginForm("MeinProfilBearbeiten", "Profile", FormMethod.Post, new { @class = "" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <h5 class="text-web mb-2">Vorname:</h5>
+                            <div class="form-group mb-4">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = @prorep.GetUser(username).Name, @Value= @prorep.GetUser(username).Name } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                            <h5 class="text-web mb-2">Familienname:</h5>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.NameFamily, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = @prorep.GetUser(username).NameFamily, @Value = @prorep.GetUser(username).NameFamily } })
+                                @Html.ValidationMessageFor(model => model.NameFamily, "", new { @class = "text-danger" })
+                            </div>
+                            <h5 class="text-web mb-2">Telefonnummer: [Beispiel 0176xxxxxxxx]</h5>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = @prorep.GetUser(username).PhoneNumber, @Value = @prorep.GetUser(username).PhoneNumber } })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark" data-dismiss="modal">Schließen</button>
+                                    <button type="submit" class="btn btn-success">Änderungen speichern</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal -->
+    }
+}

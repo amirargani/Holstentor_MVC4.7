@@ -1,0 +1,149 @@
+﻿@model  IEnumerable<Restaurant.Models.Domin.Tbl_Users>
+@{
+    ViewBag.Title = "Meine Verwaltung | Alle Benutzer anzeigen";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Restaurant.Models.Repository.HomeRep ivm = new Restaurant.Models.Repository.HomeRep();
+    var qivm = ivm.GetIndexHeaderSelect();
+}
+
+@Html.Partial("P_HeaderBG")
+<!-- Main Content -->
+<main class="main">
+    <!-- Section -->
+    <section class="py-0">
+        <div class="bg-web">
+            <!-- Section -->
+            <section class="py-0 pb-3">
+                <div class="jumbotron jumbotron-fluid bg-rosa py-7">
+                    <div class="container">
+                        <h1 class="text-web fs-3 fs-lg-5 mt-5" data-aos="fade-down" data-aos-duration="1000">Meine Verwaltung</h1>
+                        <h5 class="text-black mb-2" data-aos="fade-down" data-aos-duration="1100">Alle Benutzer anzeigen</h5>
+                        <div class="tab-content py-3 px-3 px-sm-0">
+                            <div class="tab-pane fade show active">
+                                <!-- Pagination -->
+                                <div class="col-12">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li><a class="btn btn-secondary mr-3" href="/Admin"><i class="fas fa-chevron-circle-left mr-2"></i>Meine Verwaltung</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- End of Pagination -->
+                                <div class="p-5">
+                                    <div class="table-responsive mb-2">
+                                        <table class="table table-light text-center">
+                                            <thead>
+                                                <tr class="bg-web text-white font-weight-bold" style="font-size: 0.73rem !important;">
+                                                    <th>#</th>
+                                                    <th>E-Mail</th>
+                                                    <th><span class="text-success">Aktiv</span>/<span class="text-danger">Inaktiv</span></th>
+                                                    @*<th><i class="fas fa-check text-success"></i>/<i class="fas fa-times text-danger"></i></th>*@
+                                                    <th><i class="fas fa-address-card text-info"></i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    int i = 1;
+                                                    if (Model.Count() > 0)
+                                                    {
+                                                        foreach (var item in Model.OrderByDescending(a => a.Date))
+                                                        {
+                                                            string bg = "";
+                                                            if (item.EmailConfirmed == false)
+                                                            {
+                                                                bg = "background-color: #ffeaed;";
+                                                            }
+                                                            <tr class="font-weight-bold" style="font-size: 0.83rem !important; @bg">
+                                                                <td>@i</td>
+                                                                <td>@item.Email</td>
+                                                                @*<td>@item.EmailConfirmed</td>*@
+                                                                <td>
+                                                                    @{
+                                                                        if (item.EmailConfirmed == false)
+                                                                        {
+                                                                            @*<a href="/Admin/AktivBenutzer?id=@item.ID" class="btn btn-success" style="width: 50px;"><i class="fas fa-check"></i></a>*@
+                                                                            <form class="" action="/Admin/AktivBenutzer" method="post">
+                                                                                <input type="hidden" for="@item.ID" name="Id" value="@item.ID" />
+                                                                                <button type="submit" class="btn btn-success" style="width: 50px;"><i class="fas fa-check"></i></button>
+                                                                            </form>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            @*<a href="/Admin/InaktivBenutzer?id=@item.ID" class="btn btn-success" style="width: 50px;"><i class="fas fa-check"></i></a>*@
+                                                                            <form class="" action="/Admin/InaktivBenutzer" method="post">
+                                                                                <input type="hidden" for="@item.ID" name="Id" value="@item.ID" />
+                                                                                <button type="submit" class="btn btn-danger" style="width: 50px;"><i class="fas fa-times"></i></button>
+                                                                            </form>
+                                                                        }
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    <form class="" action="/Admin/DetailsBenutzerShow" method="post">
+                                                                        <input type="hidden" asp-for="@item.ID" name="Id" value="@item.ID" />
+                                                                        <button type="submit" class="btn btn-info"><i class="fas fa-address-card"></i></button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                            i = i + 1;
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td class="bg-danger text-white" colspan="4">-</td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <!-- Pagination -->
+                                        <div class="col-12">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                    @{
+                                                        if (Model.Count() > 0)
+                                                        {
+                                                            ViewBag.TakeNumber = ViewData["DetailsBenutzerTakeNumber"];
+                                                            if (Model.Count() >= ViewBag.TakeNumber) { }
+                                                            ViewBag.CountDetailsBenutzer = ViewData["DetailsBenutzerCount"];
+                                                            double Take = ViewBag.TakeNumber;
+                                                            double Count = ViewBag.CountDetailsBenutzer;
+                                                            double Div = Math.Ceiling(Count / Take);
+                                                            for (int j = 1; j <= Div; j++)
+                                                            {
+                                                                //string ac = "";
+                                                                string di = "";
+                                                                string bg = "";
+                                                                string tx = "";
+                                                                string cu = "pointer";
+
+                                                                if (ViewBag.DetailsBenutzerPage == j)
+                                                                {
+                                                                    //ac = "active";
+                                                                    di = "disabled";
+                                                                    bg = "bg-dark";
+                                                                    tx = "text-white";
+                                                                    cu = "not-allowed";
+                                                                }
+                                                                <li class="page-item @di"><a class="page-link @bg @tx" href="/Admin/DetailsBenutzer?page=@j.ToString()" style="cursor:@cu">@j.ToString()</a></li>
+                                                            }
+                                                        }
+                                                    }
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                        <!-- End of Pagination -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="text-white mb-2 text-center" data-aos="fade-up" data-aos-duration="1600"><b>@qivm.NameSite</b></h5>
+            </section>
+            <!-- End of Section -->
+        </div>
+    </section>
+</main>
+<!-- End of Main Content -->
+@Html.Partial("P_Footer")

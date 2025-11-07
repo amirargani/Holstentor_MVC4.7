@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- Meta -->
+    @*<meta http-equiv="refresh" content="30" />*@
+    @*<meta name="author" content="ARGA" />*@
+    <meta name="google-site-verification" content="FE-7VzoSAiA6uk8S-0dOAs4mya1vO0oOHlGdlXgyk4g" />
+    <meta property="og:site_name" content="Restaurant am Holstentor Lübeck" />
+    <meta name="og:keywords" content="Restaurant am Holstentor Lübeck" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.restaurant-amholstentor.de/" />
+    <meta property="og:title" content="Cafe, Kneipe, Restaurant | Restaurant am Holstentor Lübeck" />
+    <meta property="og:description" content="Herzlich willkommen im Restaurant am Holstentor in der Lübecker Innenstadt." />
+    <meta property="site_name" content="Restaurant am Holstentor Lübeck" />
+    <meta name="keywords" content="Restaurant am Holstentor Lübeck" />
+    <meta property="type" content="website" />
+    <meta property="url" content="http://www.restaurant-amholstentor.de/" />
+    <meta property="title" content="Cafe, Kneipe, Restaurant | Restaurant am Holstentor Lübeck" />
+    <meta property="description" content="Herzlich willkommen im Restaurant am Holstentor in der Lübecker Innenstadt." />
+    <meta name="robots" content="index,follow,noodp,noydir" />
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="~/wwwroot/assets/img/favicons/favicon.ico" type="image/vnd.microsoft.icon" />
+    <!-- Vendor Stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,700%7CRoboto:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="~/wwwroot/assets/vendor/fancyapps/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="~/wwwroot/assets/vendor/aos/dist/aos.css" rel="stylesheet">
+    <!-- Theme Stylesheets -->
+    <link href="~/wwwroot/dist/css/theme.min.css" rel="stylesheet">
+    <link href="~/wwwroot/dist/css/template.css" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140317129-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-140317129-1');
+    </script>
+</head>
+<body>
+    @*<!-- Preloader -->*@
+    @Html.Partial("P_Preloader")
+    @*<!-- End of Preloader -->*@
+    @*<!-- Header -->*@
+    @*@await Html.PartialAsync("P_Header")*@
+    @*<!-- End of Header -->*@
+    @RenderBody()
+    @*<!-- JavaScript -->*@
+    @Html.Partial("P_JavaScript")
+    @*<!-- End of JavaScript -->*@
+</body>
+</html>

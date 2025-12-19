@@ -20,8 +20,7 @@ A comprehensive restaurant management system built with ASP.NET MVC 5, providing
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Database](#database)
-- [Contributing](#contributing)
-- [License](#license)
+- [Contributing](#-contributing)
 
 ---
 

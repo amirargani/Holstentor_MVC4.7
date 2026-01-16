@@ -1,10 +1,10 @@
 # 🏰 Holstentor Restaurant Management System
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.txt)
-[![Platform](https://img.shields.io/badge/Platform-Windows-0078D6.svg)](https://www.microsoft.com/windows)
-[![Language](https://img.shields.io/badge/Language-C%23-239120.svg)](https://docs.microsoft.com/en-us/dotnet/csharp/)
-[![Framework](https://img.shields.io/badge/Framework-ASP.NET%20MVC-5C2D91.svg)](https://dotnet.microsoft.com/apps/aspnet/mvc)
-[![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.7.2-512BD4.svg)](https://dotnet.microsoft.com/download/dotnet-framework/net472)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=for-the-badge)](LICENSE.txt)
+[![Platform](https://img.shields.io/badge/Platform-Windows-0078D6.svg?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/windows)
+[![Language](https://img.shields.io/badge/Language-C%23-239120.svg?style=for-the-badge&logo=csharp&logoColor=white)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+[![Framework](https://img.shields.io/badge/Framework-ASP.NET%20MVC-5C2D91.svg?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/apps/aspnet/mvc)
+[![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.7.2-512BD4.svg?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/download/dotnet-framework/net472)
 
 A comprehensive restaurant management system built with ASP.NET MVC 5, providing a complete admin interface for managing menus, categories, products, galleries, and users.
 
